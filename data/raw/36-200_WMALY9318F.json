@@ -1,0 +1,133 @@
+{
+    "synsets": [
+        {
+            "lemma": "Data Descriptors",
+            "synonyms": [
+                "this dataset"
+            ]
+        },
+        {
+            "lemma": "Future Research",
+            "synonyms": [
+                "a potential study",
+                "another study",
+                "future",
+                "future analyses",
+                "future research",
+                "future studies"
+            ]
+        },
+        {
+            "lemma": "Meaning of Results",
+            "synonyms": [
+                "I",
+                "We",
+                "our",
+                "we"
+            ]
+        },
+        {
+            "lemma": "Quality of Data",
+            "synonyms": [
+                "bin",
+                "binned",
+                "binning",
+                "combine",
+                "combined",
+                "combining",
+                "outlier",
+                "outliers",
+                "problematic",
+                "sample",
+                "sample size",
+                "sample sizes",
+                "skew",
+                "skewness",
+                "spread",
+                "the sampling method",
+                "the selection method"
+            ]
+        },
+        {
+            "lemma": "Quality of Methods",
+            "synonyms": [
+                "linearity",
+                "method",
+                "normality",
+                "technique",
+                "this method",
+                "this technique ",
+                "transformation",
+                "transformations"
+            ]
+        },
+        {
+            "lemma": "Real-World Connections",
+            "synonyms": [
+                "my analysis",
+                "my goal",
+                "our analysis",
+                "our goal ",
+                "the goal",
+                "the purpose",
+                "this analysis",
+                "this project",
+                "this study",
+                "this work"
+            ]
+        },
+        {
+            "lemma": "Real-World Interpretations of Results",
+            "synonyms": []
+        },
+        {
+            "lemma": "Statistical Results",
+            "synonyms": [
+                "ANOVA",
+                "chi-squared",
+                "maximum",
+                "minimum",
+                "one way",
+                "the mean",
+                "the median",
+                "two way"
+            ]
+        },
+        {
+            "lemma": "Visual Descriptors",
+            "synonyms": [
+                "Figure",
+                "Table"
+            ]
+        }
+    ],
+    "multiword_topics": [
+        "a potential study",
+        "the sampling method",
+        "the selection method",
+        "another study",
+        "future analyses",
+        "future research",
+        "future studies",
+        "my analysis",
+        "my goal",
+        "one way",
+        "our analysis",
+        "our goal",
+        "sample size",
+        "sample sizes",
+        "the goal",
+        "the mean",
+        "the median",
+        "the purpose",
+        "this analysis",
+        "this dataset",
+        "this method",
+        "this project",
+        "this study",
+        "this technique",
+        "this work",
+        "two way"
+    ],
+    "user_defined_topics": []
+}

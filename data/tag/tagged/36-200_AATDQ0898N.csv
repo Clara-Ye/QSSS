@@ -1,0 +1,51 @@
+﻿sentence,tag1,tag2,section
+The internet made us more connected than ever before.,Context,,Intro
+Many people have taken it to websites like YouTube for different goals like education and earning money as reported in the Forbes article: https://www.forbes.com/sites/karenhua/2015/06/23/education-as-entertainment-youtube-sensations-teaching-the-future/?sh=5549b8f247c2).,Context,,Intro
+"YouTube creators have channels that users subscribe to, and the number of subscribers could determine the success of a creator and therefore their wealth and fame as reported in YouTube’s creator academy: https://creatoracademy.youtube.com/page/lesson/subscriber-advantage).",Context,,Intro
+"In addition, the number of subscribers can differ from one continent to another.",Context,,Intro
+Our goal therefore from this report is to better understand the behavior and impact of the number of subscribers.,RQDef,,Intro
+This work may be helpful to creators looking to join the ever-growing world of YouTube.,RQSig,,Intro
+Our report will use data collected by Social Blade and which is based on the year 2018.,DataDesc,,Data
+We will focus primarily on the variable subscribers; it is a quantitative variable counting the number of people subscribed to each channel.,MethDef,DataDesc,Data
+"The mean number of subscribers was 3201757 subscribers, and the standard deviation of the subscribers was 3556605 subscribers.",ResDesc,,Data
+The research question we have on the following pages uses 2 more variables.,MethDef,,Data
+"The continent where the YouTube channel is registered, which is a categorical variable.",DataDesc,,Data
+The Americans had the biggest number of subscribers to their channels (50.4% of all subscribers being from that continent).,ResDesc,,Data
+Africa had the least number of subscribers (1.3% of all subscribers).,ResDesc,,Data
+The other variable used in our report is the views.,MethDef,,Data
+It is a quantitative variable that represents the number of views on each channel.,DataDesc,,Data
+"The mean number of views was 1346843185 views, and the standard deviation was 2036809998 views.",ResDesc,,Data
+The first question we explore in this report is to characterize the distribution of subscribers among the different channels.,RQDef,,RS
+Based on previous observations we contemplate that most channels have a small number of subscribers (1 million or below).,ResDesc,,RS
+"Looking at the histogram above, we can see that most of the channels have a smaller number of subscribers.",ResDesc(Viz),,RS
+The number of channels with a bigger audience decreases a lot (more research can be done to conclude reasons why some channels are more successful than others).,ResDesc(Viz),FutureWork,RS
+The distribution of subscribers above is strongly skewed to the right and a few outliers at 20 and 25 million subscribers.,ResDesc(Viz),,RS
+The figure shows on mode around 1 million to 1.5 million subscribers.,ResDesc(Viz),,RS
+"After we further study the distribution of subscribers, we see that the average number of subscribers is 3201757.",ResDesc,,RS
+The number of subscribers has a standard deviation close to the mean of around 3556605 subscribers.,ResDesc,,RS
+"The median number of subscribers is 1.9 million (1949612) subscribers, therefore, the evidence we got contradicts our hypothesis that most channels have less than 1 million subscribers.",ResDesc,,RS
+The interquartile of subscribers have a 25th percentile of 1080841 and the 75th percentile of 3880515.,ResDesc,,RS
+This means only 25% of the channels have less than 1 million subscribers so our contemplation was not backed by the data.,Interp,ResDesc,RS
+"The next research question we will investigate is whether the location of the channel origin affects the number of subscribers it has, if there is an association, we will characterize it.",RQDef,,RS
+"Since there is different access to technology, the number of subscribers to channels can differ from one continent to another.",Context,RQRat,RS
+"In general, continents where there are many third-world countries, like Africa have less access to technology, and continents with more advanced countries like Europe could have more, therefore, access to technology might create an association between the number of subscribers and technology.",RQRat,Context,RS
+"From these numbers, we can see that there is a lot of variation between the continents in the number of subscribers.",ResDesc,,RS
+Africa seems to have the least and the Americas seem to have the greatest number of subscribers.,ResDesc,,RS
+"We will now graphically investigate the relationship between continent and subscribers: From the boxplot above (figure x) we can see that the max, median and third quartile vary across the continents.",,,RS
+"The Americas and Oceania seem to have a bigger median, while Africa has a smaller median.",ResDesc(Viz),,RS
+There seems to be no outlier in Africa compared to the other continents.,ResDesc(Viz),,RS
+"All in all, because of the big difference in the measurements of subscribers across continents, the evidence we have can back the idea that there is an association between the continent the channel originates from and the number of subscribers.",Interp,,RS
+The third research question we will discover is to investigate whether the number of subscribers impacts the number of views on a channel.,RQDef,,RS
+"Some YouTube videos gain many views even if the channel has few subscribers, however, it seems logical that the more subscribers the channel have the more likely it is to get more views on its videos.",RQRat,,RS
+This can impact the aim of a creator and help them determine if they need more followers or a better understanding of the YouTube algorithm.,RQSig,,RS
+"We start by creating a scatterplot to visualize the relation: As shown in figure x, the number of vies on a channel increases as the number of subscribers increases.",ResDesc(Viz),,RS
+We can see a relationship between the number of subscribers and the views.,ResDesc(Viz),,RS
+"The graph shows the relation is linear, linear regression, and the correlation coefficient indicate that relation is leaner as they are appropriate.",ResDesc(Viz),,RS
+"We compute the regression values in the table below: From the regression table above, we can conclude that on average, the increase in the number of subscribers increases the number of views on a channel.",ResInf,Interp,RS
+"Our analysis focused on the YouTube channel subscribers in 2018 in different ways, we looked at them geographically and saw how their numbers affect the number of views on a channel.",ResDesc,,Discuss
+"Overall, we found that there is an association between the continent and the number of subscribers where the minority of subscribers were in Africa.",ResDesc,,Discuss
+We also noticed the number of views on a channel increase with the number of subscribers.,ResDesc,,Discuss
+Our analysis is limited a certain period therefore the results may vary now in 2021 so the results cannot be generalized to all years.,Lim,,Discuss
+"In addition, some numbers may be rounded in a way that makes the outcome not so accurate.",Lim,,Discuss
+This work can be further built on using new data using newer analysis models or using the same models by building hypotheses in the given data.,FutureWork,,Discuss
+"Overall, our analysis can improve the position of YouTube creators to have better engagement and more fame.",RQSig,,Discuss
