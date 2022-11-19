@@ -1,0 +1,45 @@
+﻿sentence,tag1,tag2,tag3,section,notes
+Introduction,Title,,,Intro,
+The world is a very large place and grows larger every day,Context,,,Intro,
+"Youtube, a popular video-sharing platform, is one of the many ways in which members of our ever-growing society share and view content",Context,,,Intro,
+"Moreover, we believe there to be many factors that may determine which accounts receive more subscribers",Context,,,Intro,
+"Our goal here is to explore the relationship between subscriber count and account category, country, and age",RQDef,,,Intro,
+Data,Title,,,Data,
+"We have collected data from 1259 youtube accounts ranging from 25 to 692 weeks of age, as well as data from 9 categories and 19 countries",DataDesc,,,Data,
+Throughout our analysis will be focusing on the subscriber count of each channel,DataDesc,,,Data,
+Plot 1 indicates the number of subscribers for each account,Struct,,,Data,
+"The mean subscriber count for the youtube accounts in our analysis is approximately 1.95 million, with the smallest and largest subscriber counts for an account being approximately 107.33 thousand and 27.77 million respectively",DataStat,,,Data,
+Account country is also a categorical variable and indicates the country where a given youtube account is located,DataDesc,,,Data,
+Table 2 indicates the number of youtube accounts located within a particular country,Struct,,,Data,
+"According to this table, a majority of accounts, 595 to be exact, are located within the United States",DataStat,,,Data,
+Account age is a quantitative variable that indicates how long since a given youtube account was created,DataDesc,,,Data,
+The plot below indicates the number of accounts that fall between a certain age range,Struct,,,Data,
+"According to this plot, the oldest account was created 692 weeks ago",DataStat,,,Data,
+Analyzing The Subscriber Count Given Category,Title,,,RS,
+Our first question will be to analyze the relationship between the subscriber count of a given category,RQDef,,,RS,
+We hypothesize that the number of subscribers across the given categories will be fairly consistent with the medians falling within the range of 1.5 to 2 million subscribers,HypDef,,,RS,
+"Upon observation of plot 3 we see that, while the entertainment category holds the account with the largest subscriber count, the comedy category has the highest median subscriber count per account at 2.94 million subscribers",ResDesc,Struct,,RS,
+"We can also see that each category, aside from news and & politics and sports, which each have two points outside of the interquartile range, has a significant number of outliers, and that many of the medians do not fall within the range we hypothesized",ResDesc,,,RS,
+Only 4 out of 9 categories have a median subscriber count within the range of 1.5 to 2 million,ResDesc,,,RS,
+Analyzing The Subscriber Count Given Country,Title,,,RS,
+Our next research question will be to analyze the relationship between the subscriber counts of each country in the data,RQDef,,,RS,
+We hypothesize that the United States will have the largest median subscriber count since Youtube is an American-based company,HypDef,HypJust,,RS,
+"Upon observing plot 4, we see that the United States holds the account with the largest subscriber count, 27.77 million",ResDesc,Struct,,RS,
+"Furthermore, three countries, the United States, India, and Great-Britain have a significant number of outliers, possibly due to variables such as industrialization (the United States and Great Britain) and population density (India) which could be influencing the popularity of these accounts as well as subscriber access to mobile devices, which can be used to view social media content",IntImp,ResDesc,,RS,
+Analyzing The Relationship Between Account Age and Subscriber Count,Title,,,RS,
+Our final research question will be to analyze the relationship between subscriber counts and the age of accounts,RQDef,,,RS,
+We hypothesize that there will be a linear increase in the proportion of subscriber count relative to account age,HypDef,,,RS,
+"Upon observation of plot 5, we can clearly see that, as account age increases, the density of data points decreases, meaning that there are more young accounts than old accounts",ResDesc,IntVar,Struct,RS,?
+"Furthermore, there does seem to be a reasonably linear relationship between subscriber count and age",IntVar,,,RS,?
+There is only one account less than 150 weeks old that has more than 10 million subscribers,ResDesc,,,RS,
+"However, among accounts older than 200 weeks old, there does not seem to be an increase in subscriber count as age increases, but we do see a decrease in the number of accounts with a lower subscriber count",ResDesc,,,RS,?
+"In summary, the data does support our hypothesis since there is a linear increase in the proportion of subscriber count relative to account age",IntVar,,,RS,
+Discussion,Title,,,Discuss,
+"Our analysis focused on their relationship between subscriber count and variables such as category, country, account age",RQDef,,,Discuss,
+"Ultimately we found there to be no consistency among the subscriber counts of account categories and that the country with the largest median subscriber count was the Republic of Korea, not the United States",ResDesc,,,Discuss,
+"Further, we found there to be a reasonably linear relationship between subscriber count and age of accounts on the streaming platform",ResDesc,,,Discuss,
+A limitation of our analysis was the sample size,LimData,,,Discuss,
+"If we were to conduct this analysis again, we would increase the sample size of youtube channels",FuWork,,,Discuss,?
+"Since there are approximately 31 million youtube channels, we believe a larger sample size may more accurately represent the relationship between subscriber count and the variables presented in this analysis",LimData,,,Discuss,?
+"Furthermore, in the future, we would like to extend the scope of our analysis and include more variables, such as the mobile devices used when subscribing to an account",FuWork,,,Discuss,?
+We would also like to analyze how demographics impact the subscriber counts of a particular country or category and will look to collaborate with other data analysts to conduct this investigation,FuWork,,,Discuss,?
