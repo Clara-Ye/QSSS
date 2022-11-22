@@ -1,0 +1,67 @@
+﻿sentence,tag1,tag2,tag3,section,notes
+Introduction,Title,,,Intro,
+The billionaire Preston Jorgesen is interested in determining the factors that appear to be related to lifespan in order to use them to attain immortality,RQDef,RQSig,,Intro,
+"Being hired by Jorgesen, we are interested in the following three questions regarding this objective: (i) whether there is supported evidence that slowing the metabolic rate may increase lifespan",RQDef,,,Intro,
+"(ii) whether the relationship between metabolic rate and lifespan, even after transformations, is linear",RQDef,,,Intro,
+"(iii) if a crab-eating raccoon's metabolic rate is reduced by 50%, with all the other characteristics stay the same, its mean lifespan my model would etimate",RQDef,,,Intro,
+"(1) The data we are using is from Database of Animal Ageing and Longevity, which is a ""curated database of ageing and life history in animals"" that was ""primarily developed for comparative biology studies""",DataDesc,,,Intro,
+"The dataset we are using has 347 observations of 14 variables, which contains all entries from AnAge for animals in the Chordata phylum, which, roughly speaking, includes animals with spinal cords, with entries that has missing variables removed",DataDesc,,,Intro,
+Exploratory Data Analysis,Title,,,Data,
+"Our dataset, as descibed above, has 347 observations of 14 variables",DataDesc,,,Data,
+"Out of 14 these variables, `X`, `HAGRID`, `Maximum.longevity.yrs`, `Body.mass.g`, `Metabolic.rate`, and `Temperature` are continuous variables, while `Kingdom`, `Phylum`, `Class`, `Order`, `Family`, `Genus`, `Species`, and `Common.name` are categorical variables",DataDesc,,,Data,
+"To allow comparions between animals of different sizes, we create a new variable `Metabolic.by.mass`, the amount of energy used per unit of body mass by dividing `Metabolic.rate` by `Body.mass.g`, in Watts per gram",MethDef,MethJust,,Data,?
+"(1) Since our task is to find if slowing the metabolic rate may increase lifespan, the response variable `Maximum.longevity.yrs`, Maximum longevity (lifespan), in years, and the feature `Metabolic.by.mass`, in Watts per gram, are key variables that we are interested",DataDesc,RQDef,,Data,RQDef?
+"In addition, since we are interested in studying the causal effect of `Metabolic.by.mass` on `Maximum.longevity.yrs`, we must consider the omitted variable effect",MethDef,MethJust,,Data,?
+"Therefore, we also need to consider `Temperature`, typical body temperature in Kelvin, as a key variable to check if it is a confounder that affects the validity of our model",DataDesc,,,Data,
+"Since all the categorical variables are taxonomic classfication information of the species, or the common name, we do not consider them as key variables in this study",DataDesc,,,Data,?
+"In addition, `X` and `HAGRID` are just ids from the database, `Body.mass.g` and `Metabolic.rate` have been transformed into `Metabolic.by.mass`, so these variables are not key variables",DataDesc,,,Data,
+"(2) As we can see from Figure 1 above, the response variable `Maximum.longevity.yrs`, is very right skewed with a few large outliers, therefore I decide to log-transform it to improve the normality",DataDesc,MethDef,MethJust,Data,?
+"(3) The feature variable `metabolic.by.mass` also has a very right-skewed distribution with some large outliers, therefore a log-transformation is needed",DataDesc,MethDef,MethJust,Data,?
+"Moreover, by examining the histogram of `Temperature` (figure not shown), we can see that it is bimodal with a major mode around 310 with data normally distributed around and a much smaller mode around 290 on its long left tail",DataDesc,,,Data,
+"(2) By comparing the pairs plots of log-transformed key variables (Figure 2 above) and original key variables (figure not shown), we can discern that log-transformation provides much better linear relationship between `log.maximum.longevity.yrs` and `log.metabolic.by.mass`, as well as between `Temperature` and `log.metabolic.by.mass` than the original variables",MethDef,MethJust,,Data,
+"Along with the evidence from univariate EDA, we are confident that this log-transformation is necessary for our study",MethJust,,,Data,
+"In addition, we also find that `log.maximum.longevity.yrs` and `Temperature` does not seem to have a linear relationship even after transformation, but a medium to strong correlation between `Temperature` and `log.metabolic.by.mass`",DataDesc,,,Data,???
+"(4) Because of this, we may have some doubt whether `Temperature` is a confounding variable or not",IntVar,,,Data,
+Modeling & Diagnostics,Title,,,RS,
+"By our reasoning in the previous section, We decide to log-transform both the response varibale `Maximum.longevity.yrs` (`log.maximum.longevity.yrs`) and the feature variable `Metabolic.by.mass` (`log.metabolic.by.mass`) as well square-root-transform to fit the model",MethDef,,,RS,
+"(1) Since we may have some doubt whether `Temperature` is a confounding variable or not, we fit a linear regression to control as below: [ text{log(Maximum.longevity.yrs)} = beta_0 + beta_1text{log(Metabolic.by.mass)} + beta_2text{Temperature} ]",MethDef,MethJust,,RS,
+"We can do a hypothesis testing to check whether `Temperature` is a confounding variable, with null hypothesis $beta_2 = 0$ for the slope coefficient for `Temperature` and alternative hypothesis $beta_2 neq 0$",MethJust,,,RS,???
+"By examining the p-value and confidence intervals of $beta_2$, we find that it has p-value of 2.10e-08 and confidence intervals [0.02833105, 0.05788089] at significance level $alpha = 0.05$",MethJust,,,RS,
+"Since this p-value is smaller than any reasonable significance level, and 0 is not in the confidence interval, we can conclude that there is enough evidence to reject the null hypothesis at signifance level $alpha = 0.05$",MethJust,,,RS,
+"In other words, there is enough evidence to support that `Temperature` is a confounding variable at signifance level $alpha = 0.05$",MethJust,,,RS,
+"(1) Since we are interested in studying the causal effect of `Metabolic.by.mass` on `Maximum.longevity.yrs`, so we have to add the confounding variable `Temperature` to our linear model to predict `Maximum.longevity.yrs` using `Metabolic.by.mass`",MethDef,MethJust,,RS,
+"Therefore, the linear model we are using for the study is the same as the one presented above for the hypothesis testing",MethDef,,,RS,
+"(1) To move step forward from the linear regression, we also want to see if a smoothing spline of `log.maximum.longevity.yrs` on `log.metabolic.by.mass`, which is also a linear smoother, can fit the data better with different effective degrees of freedom",MethDef,,,RS,RQ?
+"(2) However, it is worth noting that this setting is problematic",Other,,,RS,????????
+"From our disucssion above, we have already known that `Temperature` is a confounder, so we need to add it to our model for controlling",MethDef,,,RS,
+"However, we are asked to fit a smoothing spline model tp fit the same data",Other,,,RS,?
+"Therefore, it makes more sense to use a 1-dimension predictor due to curse of dimensionality, in this case `log.metabolic.by.mass`",MethDef,MethJust,,RS,
+"Instead, a more reasonable model to choose is a generalized additive model to include both `log.metabolic.by.mass` and `Temperature` with some smooth functions",MethDef,,,RS,
+"(3) To find the best model in this setting, We use 5-fold cross validation to find the average mean square errors and standard errors of spline models with degrees of freedom from 3 to 7 as well as the linear regression model",MethDef,,,RS,
+The table above shows the result from the cross validation,MethJust,,,RS,
+"In terms of prediction errors, it seems that the linear regression model gives the best prediction error",MethJust,,,RS,
+"(3) However, it is worth noting that the difference between the models does not appear significant, based on the uncertainty in your estimates of the prediction error",MethJust,,,RS,
+The average MSE and standard errors are almost the same across all the models,MethJust,,,RS,
+"(5) Therefore, we need to check the model assumptions by plotting diagnostic plots for our best model to check the validity of our model",MethJust,,,RS,
+"From the residuals vs fitted plot, it seems that in terms of the linear model assumptions, linearity seems to hold since residuals center around 0 for each fitted values",MethJust,,,RS,
+"From the QQ plot, it seems that the Gaussian noise assumption holds",MethJust,,,RS,
+"(4) However, for my chosen linear regression model, as points seem to spread out more around 0 and then shrink closer back to 0 as fitted values increase, heteroskedasticity can be discerned from the Residual vs Fitted diagnostic plot, which indicates that residuals are not indepedent of the feature, we need to use the non-parametric bootstrapping with resampling cases to show if animals with lower metabolic rates have longer lifespans",MethJust,MethDef,,RS,
+"(4)(6) Since residuals are not indepedent of the feature, which invalidates tests that assume that models have constant variance, we need to improve our model by fixing heteroskedasticity",MethJust,,,RS,?
+Results,Title,,,RS,
+Our selected linear regression model $text{log(Maximum.longevity.yrs)} = beta_0 + beta_1text{log(Metabolic.by.mass)} + beta_2text{Temperature}$ controls the known confounder `Temperature`,MethDef,,,RS,
+"By calculating the confidence interval for $beta_1$ [-0.60787842, -0.46223086] at significance level $alpha = 0.05$, we are 95% confident that animals with lower metabolic rates have longer lifespans",ResDesc,,,RS,
+"(1) By caculation, the metabolic rate it would have if its rate were 50% smaller is `r raccoon$metabolic.by.mass`",ResDesc,,,RS,
+The estimate the mean lifespan of an animal with all the other characteristics staying the same and such metabolic rate is `r pred.yrs` years from my best model,ResDesc,,,RS,
+"(2) Using non-parametric bootstrapping with resampling cases with 1000 bootstrap iterations, the 95% pivotal confidence interval for lifespan of an animal with those characteristics is [31.56516, 41.40858] in years",ResDesc,MethDef,,RS,
+Conclusions,Title,,,Discuss,
+My main findings about the relationship between metabolic rate and lifespan is that there is supported evidence to slowing the metabolic rate may increase lifespan,IntVar,,,Discuss,
+We have developed a linear regression model controlling the confounding variable typical body temperature to see the causal relationship between metabolic rate and lifespan,MethDef,,,Discuss,
+"For every 1 Watts/gram metabolic rate decreases, with all other characteristics staying the same, the animal will increase its lifespan by 0.53505 years",ResDesc,,,Discuss,
+"(1) To Preston Jorgensen's interest, we can conclude with 95% confidence that reducing the crab-eating raccoon's metabolic rate by 50% would cause its lifespan to change",IntVar,,,Discuss,
+It would change from `r raccoon$Max.longevity.years` years to between 31.56516 years and 41.40858 years with 95% confidence,ResDesc,,,Discuss,?
+"(2) However, my analysis has some limitations: first, the compared spline models are not necessarily reflecting the causal relationship between metabolic rate and lifespan, since the already known confounder `Temperature` is not included in the model",LimAna,,,Discuss,
+"As mentioned above, we should use generalized additive models to take the confounder into account",LimAna,,,Discuss,
+"Second, the chosen linear regression model violates the assumption of homoscedasticity, which may affect the validity of confidence interval that is tested based on the assumptions of linear models",LimAna,,,Discuss,
+"To fix heteroscedasticity, Third, there might be other confounder variables that is not included in the dataset, for example environment temperature, that may affect the conclusion",LimData,,,Discuss,
+"Also, the size of the dataset is relatively small",LimData,,,Discuss,
+A larger dataset with more observations and more features will help us improve our analysis,LimData,,,Discuss,

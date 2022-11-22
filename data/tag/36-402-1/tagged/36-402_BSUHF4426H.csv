@@ -1,0 +1,121 @@
+﻿sentence,tag1,tag2,tag3,section,notes
+Introduction,Title,,,Intro,
+"In the 21st century, it fair to say that with enough money you can buy you almost anything",Context,,,Intro,
+"Truly luxeries, in the form of material goods and experiences, that many people only dream about and most people cant even really imagine",Context,,,Intro,
+"However due to current scientific and technological limitations, there are certain things that even billions of dollar cant buy a person",Context,,,Intro,
+"With one of those priceless things being immortality, or the ability to live forever",Context,,,Intro,
+"In order to even approach the concept of eternal life, we have to begin by asking ourselves what factors even effect lifespan",RQDef,RQSig,,Intro,
+"Biological researchers around the world have devoted countless hours to better understanding what factors effect lifespan, and furthur how we can influence those factors to slow the aging process and prolong life",Context,RQSig,,Intro,
+"Figuring out what relationship there is, if any, between these factors and lifespan is a critical step in the process of getting closer to solving the issue of immortality",RQDef,RQSig,,Intro,
+"We will be using the AnAge Database of Animal Aging and Longevity, which is a database of aging and life history in animals that was mainly developed for comparative biological studies",DataDesc,,,Intro,
+"This database contains information from hundreds of scientific papers, for more than 4200 species",DataDesc,,,Intro,
+"The database includes variables such as lifespan, age of sexual maturity, adult body mass, metabolic rate, and typical body temperature (2)",DataDesc,,,Intro,
+"We have been hired by eccentric billionaire, Preston Jorgensen, to analyze the database to figure out what factors, if any, have a relationship with lifespan",RQDef,RQSig,,Intro,???
+This is so that reserach can be effectively funded to figure out how to influence these factors to extend lifespan,RQSig,,,Intro,
+"Preston Jorgensen is specifically interested in: 1) Knowing if slowing the metabolic rate can increase lifespan, 2) Finding out what kind of relationship there is between metabolic rate and lifespan, and 3) Figuring out what the effect of reducing the metabolic rate of the crab-eating raccoon by 50% would be on the animal's lifespan (1)",RQDef,,,Intro,
+"From our analysis of the database, we are able to find that there is a generally negative non linear relationship between maximum lifespan and metabolic rate",ResDesc,,,Intro,
+This however doesnt guarantee that lowering the metabolic rate of an animal species will directly correlate to that species have higher lifespan due to the variety of other factors that play a role in an animal species lifespan that isnt taken into consideration in our dataset,IntImp,LimAna,,Intro,???
+This is the case even though our model estimated the lifespan of a crab eating raccoon to be higher (increase from 19 to 20.1) if its metabolic rate was cut in half (3),ResDesc,,,Intro,
+Exploratory Data Analysis,Title,,,Data,
+"As we are beginning our data analysis, it is important to analyze the dataset and variables contained within before creating any type of model",Struct,,,Data,
+The AnAge Database of Animal Aging and Longevity contains a vareity of continuous variables along with several identifying variables,DataDesc,,,Data,
+"The continuous variables in our dataset are: life span in years (represented by Maximum.longevity.yrs), body mass in grams (represented by Body.mass.g), metabolic rate in watts (represented by Metabolic.rate), temperature in Kelvin (represented by Temperature)",DataDesc,,,Data,
+"The identifying variables in the Anage database include: Kingdom, Phylum, Class, Order, Family, Genus, Species, Common.namne for each entry in the database",DataDesc,,,Data,
+"They also include HAGRID, which is another identifying variable that contains a unique idenitification for every database entry",DataDesc,,,Data,
+"Now that we have discussed all the variable that came with the database, it is time to mention the new variable we added to the database",Struct,,,Data,
+The variable we added is called metabolic.by.mass and we created it by dividing the metabolic.rate by body.mass.g (1),MethDef,,,Data,
+The variable is measured in watts/gram and metabolic.by.mass will be used instead of metabolic.rate for the remainder of the report,DataDesc,,,Data,
+We will now begin univariate data analysis on the most relevant and interesting continuous variables,Struct,,,Data,
+"We will start by looking at the distribution of our response variable, Maximum Longevity",Struct,,,Data,
+We can see from Figure 1 that the distribution of Maximum longevity is right skewed and unimodal (3) ,DataStat,,,Data,
+"The maximum longevity variable has a spread from 2.5 years to 122.5 years, with a center around 13 and some possible outliers after lifespan greater 45 years (from unshown boxplot)",DataStat,,,Data,
+"We then look more closely at the distribution of the temperature variable, which is left skewed and unimodal, with a spread from 278.5 Kelvin to 314.1 Kelvin and a center around 309 Kelvin",DataStat,,,Data,
+A boxplot we analyzed but chose not to display showed that there are some possible outliers for values greater than 302 Kelvin,DataStat,,,Data,
+"Lastly, we analyzed the distribution of our main quantitative predictor variable, Metabolic.by.mass",Struct,,,Data,
+The Metabolic.by.mass (metabolic rate/mass) variable we created is strongly right skewed and unimodal (2) ,DataStat,,,Data,
+The metabolic by mass variable has a spread .00004543 watts/grams to .04143 watts/grams and a center around .003023,DataStat,,,Data,
+From an unshown boxplot we can see there are some potential outliers at values greater than .015,DataStat,,,Data,
+"We decided only to analyze the distribution of these three quantitative variables, because the other two quantitative variables, body.mass.g and metabolic.rate are both taken into consideration in the variable we created metabolic.by.mass",MethJust,MethDef,,Data,?
+In regard to all of the categorical variables in the dataset we decided that since these variables are primarily identifying variables and would consquently not be useful for our analysis,MethJust,,,Data,?
+For these reasons we have decided not to explore any of these variables any furthur,MethDef,,,Data,?
+As we move on to multivariate analysis we will be focusing on the 3 variables that we explored in Figure 1 below,Struct,,,Data,
+We used a pairs plot to explore the relationship between predictor variables and the response variable,MethDef,DataStat,,Data,
+"Looking at figure 2, we see that the relationships between the response variable (maximum.longevity.yrs) and the predictor variables (metabolic.by.mass and Temperature) appear non linear and very weak",MethJust,DataStat,,Data,
+"We can see some distinct clustering of datapoints, with no observable linear pattern between the variables",MethJust,DataStat,,Data,
+"Looking at the univariate eda above, we can see that our response variable, maximum.longevity.yrs, is strongly right skewed and our metabolic.by.mass predictor variable is also strongly right skewed",MethJust,DataStat,,Data,
+We also see a distinct left skew in the temperature distribution along with the fact that all 3 of the variables had potential outliers,MethJust,DataStat,,Data,
+The pairs plot in combination with our univarate data analysis leads us to believe that there are transformations we should do before modeling our data (4),MethDef,MethJust,,Data,
+"We decided to log transform the response variable, maximum.longevity.yrs, and the quantitative predictor variables, metabolic.by.mass and temperature, as they are all skewed (with maximum.longevity.yrs and metabolic.by.mass both being right skewed), before we model our data",MethDef,MethJust,,Data,
+"After applying the log transformation to our response and predictor variables, we saw clear improvment in the shape of the histogram and normality of the distribution of both maximum.longevity.yrs and metabolic.by.mass as neither histogram is still strongly right skewed",MethJust,DataStat,,Data,
+"On the other hand, the log transformation of the temperature variable didnt result in much improvement of the shape of the histogram or normality of the distribution as the distribution still has a distinct left skew",LimAna,DataStat,,Data,???
+We are now going to recreate and display the pairs plot with the transformed variables,Struct,,,Data,
+"We can see from figure 4 that while the clustering is tighter and more distinct in the untransformed temperature data, there is still noticeable clustering of data points near the top of the graphs including the log transformed temperature data",LimAna,DataStat,,Data,???
+The clustering of datapoints in the graphs including log transformed temperature dont form an noticable linear pattern between the variables,LimAna,DataStat,,Data,???
+This leads me to conclude that log transforming the temperature variable did not lead to much improvement as the histogram in Figure 3 is still left skewed and the scatterplot in the pairs plot do not have any distinguishable linear patterns or trends,LimAna,DataStat,,Data,???
+"On the other hand the scatterplot for maximum.longevity.yrs and metabolic.by.mass, is notably improved with the log transformed data",LimAna,DataStat,,Data,???
+"In the previous pair plots, we see distinct clustering in the bottom left corner of the scatterplot with no noticable linear patterns",DataStat,,,Data,
+"However, in figure 4 we can see a seemingly linear but clearly negative trend between log(Maximum.longevity.yrs) and log(Metabolic.by.mass) (6)",DataStat,,,Data,
+"Meaning that we see that as log(Metabolic.by.mass) increases, generally we see log(maximum.longevity.yrs) decrease",DataStat,,,Data,
+We will attempt to verify this possible trend in our modeling done below,Struct,,,Data,
+"Between the improvement to histograms in Figure 3 and the improvement in the pairs plot in Figure 4, we are confident that log trasforming the response, Maximum.longevity.yrs, and the main quantitative predictor, Metabolic.by.mass was an helpful decision and one we will stick with for the rest of the report",MethJust,,,Data,
+Modeling & Diagnostics,Title,,,RS,
+"Now that we have successfully transformed our response and predictor variables, we will apply 6 different models to the log transformed response and predictor variables to better understand the relationship between log(maximum.longevity.yrs) and log(metabolic.by.mass)",Struct,,,RS,
+We will compare the 6 models we create and then once we have calcuated which model is most efficient we will utilze that model to answer the questions of billionaire Preston Jorgensen,Struct,,,RS,
+We will start by fitting a linear model to the log transformed variables,MethDef,,,RS,
+"It will be a linear regression that fits the relationship between the response variable, log(maximum.longevity.yrs), and the main predictor variable, log(metabolic.by.mass)",MethDef,,,RS,
+The model is as follows: log(Maximum.longevity.yrs) = B0 + B1log(Metabolic.by.mass) (1),MethDef,,,RS,
+Figure 5 below shows a plot of the linear model we created and just visually speaking the linear regression seems to fit the data decently well,MethJust,,,RS,
+"In regard to the other 5 models, since one of the goals of our analysis is to understand the linearity of the relationship between maxixum longevity and metabolic rate, we will apply 5 non parametric smoothed spline models at degrees of freedom 3 - 7",MethDef,MethJust,,RS,
+"This model will be as follows: log(Maximum.longevity.yrs) = B0 + s(log(Metabolic.by.mass)), (2) where s() is representativce of the nonlinear smoothing function with degrees of freedom from 3-7",MethDef,,,RS,
+"Now that all the models have been created, we will compare them to decide which model is the best performing",Struct,,,RS,
+"If the smoothed spline models perform better than the linear model we created, we can take it as an indication that the relationship is better modeled in a non-parametric way",MethDef,,,RS,???
+"Now that all the models have been fit, we are going to do 5 fold cross validation to figure out what the prediction error and standard error for each respective model is, so that we can quantify which model is most predicitive (and thus better) with independent, new data sets",MethDef,,,RS,
+The results of the cross validation are as follows: we found that the spline models outperformed the linear model in terms of estimated MSE of prediction error across all the degrees of freedom,MethJust,,,RS,
+"Of the spline models, the spline model with degrees of freedom = 5 had the lowest estimated MSE of predicition error at approximately 0.3542 as can be seen in Figure 6 (3)",MethJust,,,RS,
+"The rest of the spline models (degrees of freedom 3,4,6,7) had an estimated MSE of prediction error between 0.35425 - 0.3561",MethJust,,,RS,
+The linear model had an estimated MSE of prediction error equal to .364156,MethJust,,,RS,
+We also calculated standard error for all models to find that the linear model has a lower standard error than the spline models,MethJust,,,RS,
+"The standard error for the linear model was approximately .0157 and the standard error for the spline models was approximately .0165-.0172, we will discuss the relevant of these standard error values later in the report",MethJust,Struct,,RS,
+"Now that we have chosen our best predicitive model, we will run diagnostics on the spline model (df = 5) to better understand its strengths and weaknesses",Struct,,,RS,
+We decided to start by creating at the plot of the residuals,Struct,,,RS,
+"If there were a clear pattern in the residual plot, this would be indication of problems with the fit of our model",MethJust,,,RS,???
+"Looking at Figure 7, we can see that there is no clear pattern among the residuals, as they seem to show a constant scatter around 0 without any clear outliers",MethJust,,,RS,
+Next we decided to create a QQ Plot to better understand the normality of the data,Struct,,,RS,
+"If the points on the QQ plot form a straight/linear line, this is an indication that our model is strong regarding normality",MethJust,,,RS,???
+If the points deviate from the straight line this is an indication of an issue with normality in our model,MethJust,,,RS,???
+"Looking at Figure 8, we can see that the tails of the QQnorm line deviate from the straight line, indicating that our model may have some issues with normality",MethJust,,,RS,
+A possible improvement to our model to address the deviation from normality would be to have outliers removed from the data (4),MethDef,,,RS,
+"After quantifying the differences between our 6 models, we feel its necessary to note that while our spline model with degrees of freedom = 5 had the lowest estimated MSE of prediction error, there does not seem to be a significant difference between the 5 spline models we created",MethJust,,,RS,
+The difference doesnt seem significant as the difference in estimated MSE of prediction error values are within 1 standard error of each other for all 5 spline models (5),MethJust,,,RS,
+The difference between the estimated MSE of prediction error is more substantial between the smoothed spline model with degrees of freedom = 5 and the linear model than between the best spline model and the rest of the spline models,MethJust,,,RS,
+"however, since the predictor error is only seperated by approximately 1 standard error, the difference only seems slightly significiant",MethJust,,,RS,
+"After analyzing the residual plot closely and finding that the residuals seem independent of X, we have chosen to resample the residuals for our bootstrap later in the report (6)",MethDef,MethJust,,RS,
+Results,Title,,,RS,
+"Now that we have selected a model and run diagnostics, its time to utilze our model to answer the research questions",Struct,,,RS,
+We want to start by addressing the first question regarding the relationship between lifespan and metabolic rate,RQDef,,,RS,
+"In order to answer this question, we created Figure 9, where we plotted the points of log(Maximum.longevity.yrs) vs log(Metabolic.by.mass) and then fit our chosen model (smoothing spline with degrees of freedom = 5)",MethDef,,,RS,
+Figure 9 clearly shows that in general lower metabolic rates (which lead to lower log(metabolic.by.mass)) correspond to higher maximum life span (which leads to higher log(Maximum.longevity.yrs) (1) ,ResDesc,,,RS,
+"The reverse is also true: higher metabolic rates lead to higher log(metabolic.by.mass) which correspond to lower maximum life span, or lower log(Maximum.longevity.yrs)",ResDesc,,,RS,
+"In order to answer the second research question regarding the Crab-eating raccoon, we start by obtaining its features",RQDef,Struct,,RS,
+We can see that the Crab-eating raccoon has an expected lifespan of 19 years,ResDesc,,,RS,
+"In order to estimate its life span if its metabolic rate was 50% lower, we have to start by obtaining its base metabolic rate, which is 2.588 Watts",ResDesc,MethDef,,RS,
+"This metabolic.rate corresponds to a metabolic.by.mass value of .002231034, which we multiply by 1/2 to estimate the Crab-eating raccoons new mean lifespan",ResDesc,MethDef,,RS,
+Our model estimates that a 50% lower metabolic rate would correspond to a new mean life span of 20.11787 years (2) ,ResDesc,,,RS,?
+"It is important to note that we cannot make a blanket statement that lowering a species metabolic rate would directly translate to increased mean lifespan, because there are many factors (such as diet and environmental/geographical location) that would also influence a species maximum mean lifespan and arent considering in this dataset",IntImp,LimAna,,RS,
+"Now we conduct a 1000 sample non parametric bootstrapping, to check the significance of our results described in the paragraph above",MethDef,,,RS,
+"Bootstrapping by resampling residuals allowed us to find a 95% confidence interval for the estimated lifespan of the crab-eating raccoon, assuming a 50% slower metabolic rate by mass, which was 17.45691 years to 21.54319 years (3)",ResDesc,,,RS,
+It is worth noting that this interval contains our estimate of 20.11787 years,ResDesc,,,RS,?
+Conclusions,Title,,,Discuss,
+"When we began with our exploratory data analysis it was critical that we identify the key variables, such as the response variable (maximum.longevity.yrs) and key quantitative predictor variables like metabolic.by.mass",DataDesc,,,Discuss,
+"In order to increase the effectiveness of our modeling it was vital that we transformed the key variables to improve normality and linearity, as many of the key variables were strongly skewed prior to being transformed",MethDef,MethJust,,Discuss,
+"Once the variables were transformed it was clear that there was a negative trend between the response variable, (log(Maximum.longevity.yrs)), and a key quantitative predictor variable ((log(Metabolic.by.mass))",IntVar,,,Discuss,?
+This inverse trend between metabolic rate by mass and lifespan was later confirmed by our chosen model (best based on lowest prediction error),IntVar,,,Discuss,?
+We could clearly see in Figure 9 that there is an association between having a lower metabolic rate by mass and a higher mean lifespan for the animal species in the dataset (1) ,IntVar,,,Discuss,?
+"Our model did demostrate, specifically with the crab-eating raccoon, that if the animal had a 50% slower metabolic rate it would be associated with a noticably higher average lifespan",IntVar,,,Discuss,
+The average life span for a normal crab-eating raccoon is 19 years according to our dataset,ResDesc,,,Discuss,
+"On the other hand, our model estimated that the expectation for a crab-eating raccoon with a 50% slower metabolic rate would be 20.11787 years",IntVar,,,Discuss,
+"However our 95% confidence interval for this estimation is [17.45691, 21.54319], which doesnt indicate significance to this change in expected maximum lifespan, since 19 years is still within the interval",IntVar,ResDesc,,Discuss,
+"It is not reasonable for Preston Jorgensen to conclude that reducing a crab eating raccoon's metabolic rate by 50% would cause its lifespan to change because there are a variety of factors including by not limited to geographic location, environemntal conditions, and diet that directly influence lifespan but are not within the scope of our dataset (2)",IntImp,LimAna,,Discuss,?
+"A limitation of our report is that because our dataset has us comparing accross a variety of animal species, we arent able to directly state or prove that a decrease in metabolic rate by mass in regard to a particular species would correspond to an increase in mean lifespan of that particular species (3)",IntImp,LimAna,,Discuss,?
+Again this is because there are a variety of factors that influence an individual species lifespan that arent considered in our data,LimData,,,Discuss,LimAna?
+However our dataset and analysis does allow us to conclude that there is an association between an animal species having a lower metabolic rate by mass and a longer mean lifespan,IntVar,,,Discuss,

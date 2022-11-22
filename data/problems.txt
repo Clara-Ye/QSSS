@@ -1,1 +1,3 @@
-Category is a categorical variable indicating which genre of videos the Youtube account posts (ie. gaming, entertainment).
+Defining new variable = MethDef? DataDesc?
+Model selection = MethJust? New tag?
+"Our client wants us to..." = RQSig?
