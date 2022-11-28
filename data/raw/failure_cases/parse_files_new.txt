@@ -1,0 +1,2 @@
+In reality, these pollutants' concentrations and densities can not be negative. Before we build our models, we must explore the shape and distribution of each variable indivdually. We will start by exploring our predictor variables.
+Looking at these time series plots, we can see a seasonal oscillation of deaths and log deaths across time. This can be due to seasonal weather changes that influence both temperature and air pollution levels.

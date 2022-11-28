@@ -1,0 +1,45 @@
+﻿sentence,tag1,tag2,tag3,section,notes
+Introduction,Title,,,Intro,
+"Billionaire Preston Jorgensen would like to understand how pollutants are related to deaths, and search for ways to extend his life",RQDef,Context,,Intro,
+(1) There are three aspects that he is particularly interested in,Struct,Context,,Intro,?
+"First, are pollutants like ozone, SO$_{2}$, and PM$_{10}$ associated with increased deaths",RQDef,,,Intro,
+"If so, which of them is most strongly associated with mortality",RQDef,,,Intro,
+"Second, is the effect of pollution on death instantaneous, or does it extend over time",RQDef,,,Intro,
+"Third, if each pollutant were lowered to be the lowest value ever recorded, what does the model predict for the mean death rate for Chicago on a 70-degree day",RQDef,,,Intro,
+Should Jorgensen spend his fortune to reduce pollution,RQDef,,,Intro,???
+"(2) To analyze these questions, I use a dataset that provides air quality measurements and non-accidental death number in Chicago each day from January 1987 to the end of December 2000",DataDesc,,,Intro,
+"The dataset contains 5,114 observations",DataDesc,,,Intro,
+"Each observation includes variables such as death number, median density of PM$_{10}$ pollution, median concentration of ozone, median concentration of SO$_{2}$, and mean temperature",DataDesc,,,Intro,
+"(3) The main findings to the three guiding questions are the following: First, pollutants like ozone, SO$_{2}$, and PM$_{10}$ are associated with increased deaths",ResInf,IntVar,,Intro,?
+"Among these pollutants, ozone is most strongly associated to mortality",ResInf,IntVar,,Intro,?
+"Second, the effect of pollution on death extends over time",ResInf,IntVar,,Intro,?
+"Third, if each pollutant were lowered to be the lowest value ever, my model will predict the mean death number for Chicago on a 70-degree day to be between 106.3425 and 114.5066",ResInf,IntVar,,Intro,?
+"Since the dataset is an obvervational study, I could not conclude causal effect",LimAna,IntImp,,Intro,
+"Thus, Jorgensen should not spend his fortune to reduce pollution because reducing pollution might not neccessarily cause decreased death",IntImp,,,Intro,
+Exploratory Data Analysis,Title,,,Data,
+The research goal is to explore the relationship between mortality and the predictors,RQDef,,,Data,
+"(1) The four predicor variables are PM$_{10}$ pollution, ozone, sulfur dioxide, and temperature, or their respective lagged versions",DataDesc,,,Data,
+"According to Figure 1, the distributions of lagged or unlagged pollutants are slightly right skewed, and the distribution of lagged or unlagged temperature are slightly left skewed",DataStat,,,Data,
+"All of the unlagged and lagged predictors are unimodal, except for temperature and lagged temperature, which seem to be bimodal",DataStat,,,Data,
+"Table 1 demonstrates the median, mean, min, and max value for each predictor",Struct,,,Data,
+Results,Title,,,RS,
+"(1) To test the goodness of fit of model 2, I conduct the following hypothesis test: begin{center} Null Hypothesis: $H_0$: My chosen model (Model 2) is correct end{center} begin{center} Alternative Hypothesis: $H_a$: The saturated model is correct end{center}",MethDef,,,RS,
+The saturated model has 4012 degrees of freedom and my model has 17 degrees of freedom,MethDef,,,RS,
+The deviance follows a chi-square distribution with 3995 degrees of freeodom,MethJust,,,RS,?
+"The p value I get is 0, which means that I have sufficient evidence to reject the null hypothesis and conclude that the saturated model fits significantly better than my model",MethJust,,,RS,
+"(2) To determine whether the pollutants are associated with mortality, I fist fit a model that uses only temperature as a feature, not the pollutants",MethDef,RQDef,,RS,
+"Specifically, model 3 is: begin{center}E[log(Death)] = $beta_0$ + s(Lag Temperature)end{center}",MethDef,,,RS,
+And I conduct the following hypothesis test: begin{center} Null Hypothesis: $H_0$: Model 3 is correct end{center} begin{center} Alternative Hypothesis: $H_a$: My model (Model 2) is correct end{center},MethDef,,,RS,
+"From ANOVA test, the p value is 2.2e-16, which is less than 0.5",ResInf,,,RS,
+This means I have sufficient evidence to reject the null hypothesis and conclude that there is association between pollutants and mortality,IntVar,,,RS,
+"(3) According to Table 2, the cross validation error for model 1 is 200.3191 and the cross validation error for model 2 is 186.6846",ResDesc,,,RS,???
+"Thus, the effect of pollution appears to extend over time because model 2 has smaller cross validation error than model 1",ResDesc,IntVar,,RS,
+"(4) For my chosen model (Model 2), I then draw the smoother term for each of predictor, with uncertainty",MethDef,,,RS,
+"According to Figure 5, the curves for lagged PM$_{10}$ and lagged SO$_2$ are rather flat compared to the curve of ozone",ResDesc,,,RS,
+"As for the curve of ozone, there is an obvious increasing trend in the curve",ResDesc,,,RS,
+The slope for the ozone curve seems to be the largest,ResDesc,,,RS,
+"Thus, among the three pollutants, ozone appears to be most associated with mortality",IntVar,,,RS,
+"Moving on, I create CI for mean number of deaths with the three pollutants and temperature",MethDef,,,RS,
+(5) Table 3 shows the smallest value observed for each lagged pollutant variable,Struct,,,RS,
+"With these levels of pollutants, my model will predict the mean number of deaths on a 70-degree day to be 110.3491",ResInf,,,RS,
+"Using the predicted value and the SE, a 95% confidence interval for the mean number of deaths is (106.3425, 114.5066)",ResInf,,,RS,

@@ -1,3 +1,0 @@
-Defining new variable = MethDef? DataDesc?
-Model selection = MethJust? New tag?
-"Our client wants us to..." = RQSig?

@@ -1,0 +1,101 @@
+﻿sentence,tag1,tag2,tag3,section,notes
+Introduction,Title,,,Intro,
+The goal of this research is to inform Preston Jorgenson which pollutants are most strongly associated with mortality so he can make a decision to help extend his life (1),RQDef,RQSig,,Intro,
+We will dive into three questions: Is there evidence that these pollutants are associated with increased mortality,RQDef,,,Intro,
+Which pollutant seems to be most strongly associated with mortality,RQDef,,,Intro,
+"Is the effect of pollution instantaneous (i.e., the amount of pollution on a certain day only affects death rate on that same day), or does it extend over time (i.e., it affects the death rate over the next few days)",RQDef,,,Intro,
+"If the level of each pollutant were somehow lowered to match the lowest value ever recorded, what mean death rate would we estimate for Chicago on a 70-degree day",RQDef,,,Intro,
+Should Jorgensen spend his enormous fortune to try to reduce pollution this much,RQDef,,,Intro,
+"In order to answer these questions, we will use a dataset with 5,114 observations (2)",DataDesc,,,Intro,
+"Each observation has 6 variables, explained below: time: The date of observation, given as the number of days before or after December 31, 1993 death: The number of non-accidental deaths on that date pm10median: The median density of PM$_{10}$pollution, i.e., particulate matter with diameter less than 10 micrometers (milligrams per cubic meter) lag_pm10median: 7 day average of the median density of PM$_{10}$pollution, i.e., particulate matter with diameter less than 10 micrometers (milligrams per cubic meter) o3median: The median concentration of ozone (parts per billion) lag_o3median: 7 day average of the median concentration of ozone (parts per billion) so2median: The median concentration of sulfur dioxide (SO2) lag_so2median: 7 day average of the median concentration of sulfur dioxide (SO2) tmpd: The mean temperature (Fahrenheit) lag_tmpd: 7 day average of the mean temperature (Fahrenheit) After the analysis of this data, we were not able to find a clear correlation between pollutants and mortality (3)",DataDesc,,,Intro,
+"Throughout the report below, we did find significance between certain models but none of them allowed us to confidently conclude that the pollutants were significantly correlated with number of deaths",ResInf,IntVar,,Intro,??
+We would highly recommend that Preston Jorgensen speak to his physician about the risks of pollution because all of the data is from the same city so it is not great for us to make assumptions about pollution and mortality,IntImp,LimData,,Intro,
+We do not know if Preston Jorgensen has lung or health issues and that was not addressed in the analysis as well,IntImp,,,Intro,?
+"Preston Jorgensen should ask us to analyze a different data set, speak to an expert, or do research into other methods to expand his longevity",IntImp,,,Intro,?
+Exploratory Data Analysis,Title,,,Data,
+"The key variables we will use to answer the research questions are death, pm10median, lag_pm10median, o3median, lag_o3median, so2median, lag_so2median, tmpd, and lag_tmpd",DataDesc,,,Data,
+"A more in-depth description of each of these variables, and their units, is in the introduction section of this write-up (1)",Struct,,,Data,
+"When we look at the histograms, in Figure 1, almost all of them appear to be unimodal and skewed to the left",DataStat,,,Data,
+"The variables tmpd and lag_tmpd ares somewhat bimodal and skewed to the right, and the lag variable for ozone is slightly bimodal",DataStat,,,Data,
+"In Figure 2, we do not see an very obvious relations besides the variables with their lag counterpart, which we would expect",DataStat,,,Data,
+We will need to do further analysis,Struct,,,Data,?
+"Now, let's talk about the summary of these key variables",Struct,,,Data,
+"Death has a minimum of 69, maximum of 411, median of 114, mean of 115.4189, and standard deviation of 15.2988",DataStat,,,Data,
+"Pm10median has a minimum of -37.3761, maximum of 320.7248, median of -3.5391, mean of -0.1464, and standard deviation is 19.256",DataStat,,,Data,
+"Additionally, it is worth noting that there are 251 data points with no value for pm10median which will affect the analysis",LimData,DataStat,,Data,
+"O3median has a minimum of -24.779, maximum of 43.688, median of -3.326, mean of -2.1794, and standard deviation of 10.2036",DataStat,,,Data,
+"So2median has a minimum of -8.2061, maximum of 28.9034, median of -1.2183, mean of -0.6361, and standard deviation of 2.9262",DataStat,,,Data,
+"Also, there are 27 data points with no value for so2median",DataStat,LimData,,Data,???
+"Tmpd has a minimum of -16, maximum of 92, median of 51, mean of 50.1933, and standard deviation of 19.462",DataStat,,,Data,
+"Now, for the lag variables",Struct,,,Data,
+"All the lag variables have missing datapoints, which wehave already discussed the issues with",LimData,DataStat,Struct,Data,?
+"Lag_pm10median has a minimum of -24.1192, maximum of 56.0811, median of -1.6828, mean of -0.0243, and standard deviation of 10.2995",DataStat,,,Data,
+There are 1054 missing datapoints,DataStat,LimData,,Data,
+"Lag_o3median has a minimum of -21.340, maximum of 28.627, median of -2.57, mean of -2.1669, and standard deviation of 8.1924",DataStat,,,Data,
+There are 6 missing datapoints,DataStat,LimData,,Data,
+"Lag_so2median has a minimum of -4.6433, maximum of 10.6562, median of -0.8747, mean of -0.649, and standard deviation of 1.557",DataStat,,,Data,
+There are 139 missing datapoints,DataStat,LimData,,Data,
+"Lag_tmpd has a minimum of -5.714, maximum of 85.429, median of 51, mean of 50.2224, and standard deviation of 18.4023",DataStat,,,Data,
+There are 6 missing datapoints,DataStat,LimData,,Data,
+"Now, we will remove the datapoints with NA in it so when we start to do transformations and models, we will have variables with all values and no NA",MethDef,MethJust,,Data,?
+We kept it in for the analysis above because the NA values do not affect the histograms and we thought it would be helpful to see that there is a portion of the data that we are not utilizing because of lack of measurements and data,MethJust,,,Data,
+The response variable is death,DataDesc,,,Data,
+"If we look at the plot for the death variable in Figure 1, we can see that the histogram is unimodal and skewed left",DataStat,,,Data,
+The plot does not appear normal,DataStat,,,Data,
+We can take the logarithm of the death variable because we are sure that all values are greater than 0 because the minimum is 69,MethDef,MethJust,,Data,
+"In Figure 3, we see the histogram for the log of death it is still unimodal and skewed left but it appears slightly more normal and less skewed that just the death variable without the logarithm transformation (2)",MethJust,DataStat,,Data,
+"In Figure 4, we look at the deaths over time (3)",Struct,,,Data,
+There are 4 obvious outliers,DataStat,,,Data,
+"After deeper analysis into the data, the 4 outliers are 226 deaths on August 13th, 1995, 411 deaths on August 14th 1995, 287 deaths on August 15th 1995, and 228 deaths on August 16th, 1995",DataStat,,,Data,
+"Clearly, there was a big event that occurred at this time",IntImp,,,Data,
+These deaths were a result of the heat wave that hit Chicago over these couple days,IntImp,,,Data,
+"Although these are clear outliers, I am going to keep them in the data because these deaths are a result of the environment and not a random freak event",MethDef,MethJust,,Data,
+"Next, we will compare all relevant variables to our predictor variable, death, which will be visible in Figure 5",Struct,,,Data,
+"It is hard to distinguish patterns with the outliers so although we have decided to keep them in the data set for the model, we will remove them for the plots in Figure 6 too see the pattern better (4)",MethDef,MethJust,,Data,
+"Now, that we have the plots without the outliers, we can see that there are still no very clear patterns and lots out clustering besides temperature which has a slightly negative trend (5)",DataStat,,,Data,
+"Based off all these plots, we believe we have enough information to continue to the next section",Struct,,,Data,
+Modeling & Diagnostics,Title,,,RS,
+"First, we will create two different gam models that incorporate all relevant predictor variables",MethDef,,,RS,
+The first will include the non-lag variables that have data taken on one day,MethDef,,,RS,
+The second will include the lag variables that are a 7 day average,MethDef,,,RS,
+We decided to perform 5-fold cross validation,MethDef,MethJust,,RS,
+"Model one, with the non-lag variables, has an cross-validation error of 200.9856 and an estimated standard of error of 22.1774",MethJust,,,RS,
+"Model two, with the lag variables, has an cross-validation error of 187.5841 and an estimated standard of error 22.0151 (2)",MethJust,,,RS,
+"Based on this information, we will pick the second model for the results because it has a slightly better standard of error and it has a more significantly better cross-validation error (3)",MethDef,MethJust,,RS,
+"This makes sense intuitively, because one would think that multiple days in a row of poor air quality would affect one's lungs and health more than one random day of poor air quality",MethJust,IntImp,,RS,?
+In the next section we will perform a goodness-of-fit test for this better model and continue our analysis,Struct,,,RS,
+Results,Title,,,RS,
+"First, let's do a goodness-of-fit test",Struct,MethDef,,RS,MethDef?
+"We will let the null model be model two, and null hypothesis be that model two is the correct model",MethDef,,,RS,?
+"The alternate model will be the saturated gam model with lag and non-lag variables, and the alternate hypothesis will be that the saturated model is correct (1)",MethDef,,,RS,?
+"Now, we will calculate the deviance for both models and test the hypotheses by doing a chi-square test on the difference in deviances",MethJust,,,RS,?
+We found that the deviance is 153.4 and the p-value is 2.2e-16 which is incredibly small,MethJust,,,RS,?
+"Therefore, we have discovered that there is a significant difference between the two models and we cannot accept the null hypothesis that the second model, with the lag variables only, is the correct model",MethJust,,,RS,?
+"We will instead assume the alternative hypothesis, that the saturated model, with lag variables and non-lag variables, is the correct model",MethJust,,,RS,?
+"This could be because increasing the number of variables of the model, increases the complexity and allows for the model to be over-fitted",Other,,,RS,?
+"Next, we will fit a model that only encompasses the temperature part of our second model, which only utilizes lag variables, and compare the temperature only model to the second model",MethDef,Struct,,RS,?
+"Because the deviance is -236.59, which is high, it seems like there is a large difference in the two models (2)",MethJust,,,RS,?
+"Additionally, the p-value calculated is 2.2e-16 meaning that there is a significant difference between the models",MethJust,ResInf,,RS,?
+"We had that the null hypothesis is that the second model, which is only lag variables, is correct, and the alternative hypothesis is that the lag temperature model, is correct",MethJust,MethDef,,RS,?
+"Because the p-value is so small, we cannot accept the null hypothesis so we will assume that the lag temperature model is correct",MethDef,ResInf,MethJust,RS,?
+"Furthermore, we can interpret this to mean that the temperature is a better indicator of the number of deaths",IntVar,,,RS,?
+"We are also assuming that the effect on pollution appears to extend over time because, based off the 5-fold cross-validation, the lag variables are a better predictor (3)",IntVar,ResDesc,,RS,?
+Now we will look at the spline graphs for the second model,Struct,,,RS,
+"Based on the plots in Figure 7, it appears that the ozone variables is the most associated because its graph has the largest curve and is the least linear (4)",ResDesc,,,RS,
+However this does not mean that there is a direct correlation between the ozone pollution and number of deaths,IntVar,,,RS,
+"Next, we will use different methods to predict the number of deaths on a 70-degree day with the minimum observed value for each polution variable",RQDef,Struct,,RS,
+Using the predict function we get a fitted value of 110.3491 and a 95% confidence interval of (106.2680 114.4302) (5),ResInf,,,RS,
+"Now, we will perform parametric bootstrapping because, apart from a handful of outliers, the residuals appear to be normal and centered around 0, in the plots in Figure 8",MethDef,MethJust,,RS,
+"Because we are assuming the residuals are normal, we will sample from the normal distribution with the calculated standard deviation and a mean of 0 to get the new value at each bootstrap iteration",MethDef,MethJust,,RS,
+"The confidence interval given by bootstrapping is (107.9474, 112.5893) (6)",ResInf,,,RS,
+The parametric bootstrap gave a tighter confidence interval,ResInf,,,RS,
+"This is because we have assumptions about the distribution of the residuals in order to perform parametric bootstrapping but when using the predict function, there are no assumptions so the interval is wider (7)",IntVar,,,RS,?
+Conclusions,Title,,,Discuss,
+"After the analyzing the data in several ways throughout this paper, we do not believe that it is clear that there is a relationship between atmospheric pollutants and mortality (1)",ResInf,,,Discuss,?
+"None of the plots in any section have a very clear trend, for the pollutants, and although there was a difference in models, or stronger association between variables, this does not tell us that the association is strong in general and should be treated as a possible cause of, or correlation to, mortality",LimAna,IntImp,DataStat,Discuss,?
+"Preston Jorgensen cannot conclude that reducing the pollutants would cause mortality to decrease to the amount our model estimated because this is observational data so we are only able to estimate correlation, which we do not even believe we have in this case (2)",IntImp,LimAna,,Discuss,
+There are lots of limitations with our analysis and with the data in general (3),Struct,,,Discuss,
+"First of all, we do not know, from this data or analysis, whether or not pollutants are just a confounding variable",LimAna,,,Discuss,LimData?
+"There are many other factors like health care, wealth, etc., that might make a city have a higher or lower mortality within its population",LimAna,,,Discuss,LimData?
+It would have been helpful to have more cities in this analysis to feel that it was more thorough,LimData,,,Discuss,
+"We would ask Preston Jorgensen to revert to the recommendations in our introduction that he should give us a different, more thorough dataset, refer to an expert in this field, or look at a different method to extend his lifespan",IntImp,,,Discuss,
