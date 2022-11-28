@@ -7,7 +7,7 @@ This is the repository for my QSSS senior thesis.
 - `--strip_trailing_punctuation`: Strip certain trailing punctuations (!.?;:) if `t`, `true`, `y`, or `yes`. Defaults to `f`.
 - `--data_dir`: Directory to the raw data files. Defaults to `./data`.
 - `--output_dir`: Directory to the output files. Defaults to `./output`.
-- `--output_names`: Naming convention for the output files. If `original`, Defaults to `original`.
+- `--output_names`: Naming method for the output files. If `original`, uses the same names as the raw data files. If `random`, uses a random sequence of 12 uppercase letters and digits. Defaults to `original`.
 - `--output_format`: Header template of the output csv files, separated by `|`. Defaults to `sentence|tag1|tag2|tag3|section|notes`.
 - `--sentence_column`: Column number to place the parsed sentences in the output csv files. Defaults to `1`.
 ## Sample command:
